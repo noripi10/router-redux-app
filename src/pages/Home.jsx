@@ -7,18 +7,18 @@ import { Container } from '@material-ui/core';
 import { HeaderBar, MenuItem } from '../components';
 
 const Home = () => {
-	// const { logout } = useContext(AuthContext);
-	// const history = useHistory();
-	// const auth = useSelector((state) => state.auth);
+  // const { logout } = useContext(AuthContext);
+  // const history = useHistory();
+  // const auth = useSelector((state) => state.auth);
 
-	return (
-		<>
-			<HeaderBar title={'ホーム'} />
-			<Container>
-				<MenuItem />
-			</Container>
-		</>
-	);
+  return (
+    <>
+      <HeaderBar title={'ホーム'} />
+      <Container>
+        <MenuItem />
+      </Container>
+    </>
+  );
 };
 
 export default Home;
