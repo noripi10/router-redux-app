@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionLogin } from '../redux/actions/auth';
-import { AuthContext } from '../context/AuthProvider';
+import { useLogin } from '../context/AuthProvider';
 import { HeaderBar } from '../components';
+
 const Container = styled.div`
   position: absolute;
   top: 50%;
@@ -18,7 +20,7 @@ const Container = styled.div`
   margin: auto;
   padding: auto;
   flex-direction: column;
-  background-color: #ddd;
+  background-color: #bbb;
   border-radius: 8px;
 `;
 
@@ -48,9 +50,18 @@ const Button = styled.button`
   }
 `;
 
+const Wait = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  z-index: 10;
+`;
+
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const login = useLogin();
   const [userId, setUserID] = useState('');
+  const [wait, setWait] = useState(false);
 
   const textChange = (e) => {
     setUserID(e.target.value);
@@ -62,12 +73,27 @@ const Login = () => {
     }
   };
 
-  const loginHandle = (e) => {
+  const loginHandle = async (e) => {
     e.preventDefault();
     if (!userId) {
       return false;
     }
-    login(userId);
+
+    // ログイン処理中な感じに
+    setWait(true);
+    const result = await new Promise((resolve, reject) => {
+      try {
+        setTimeout(() => {
+          resolve('OK');
+        }, 3000);
+      } catch {
+        reject('NG');
+      }
+    });
+    console.log(result);
+    if (result === 'OK') {
+      login(userId);
+    }
   };
 
   useEffect(() => {
@@ -87,6 +113,11 @@ const Login = () => {
         </div>
         <Button onClick={loginHandle}>ログイン</Button>
       </Container>
+      {wait && (
+        <Wait>
+          <CircularProgress color="primary" />
+        </Wait>
+      )}
     </>
   );
 };
