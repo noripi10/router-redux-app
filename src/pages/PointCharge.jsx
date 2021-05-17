@@ -7,8 +7,10 @@ import {
   FormControl,
   MenuItem,
   makeStyles,
+  Grid,
+  Typography,
 } from '@material-ui/core';
-import { HeaderBar, SuggestionField } from '../components';
+import { SuggestionField } from '../components';
 import { AppButton, Table } from '../components';
 
 const initRows = [
@@ -42,21 +44,30 @@ const initColumns = Object.keys(initRows[0]).map((key, i) => ({
 
 const initColumns2 = Object.keys(initRows2[0]).map((key, i) => ({
   field: key,
-  headerName: key.toUpperCase(),
   hide: key === 'id' ? true : false,
   width: (i + 1) * 150,
+  // headerName: key,
+  renderHeader: (params) => {
+    return (
+      <span role="img" aria-label="enjoy">
+        {params.field}
+      </span>
+    );
+  },
 }));
 
 const useClasses = makeStyles((theme) => ({
   root: {
-    flex: 1,
     display: 'flex',
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  titleContainer: {
+    margin: 12,
+    marginLeft: 24,
+  },
   container: {
-    margin: '6px 48px',
+    margin: '6px 28px',
     marginBottom: 8,
     display: 'flex',
     flexDirection: 'row',
@@ -99,7 +110,9 @@ const PointCharge = () => {
   }, []);
   return (
     <>
-      <HeaderBar title="一括登録" />
+      <Container className={classes.titleContainer}>
+        <Typography variant="h6">一括登録</Typography>
+      </Container>
 
       {/* 請求先 */}
       <Container className={classes.container}>
@@ -155,54 +168,56 @@ const PointCharge = () => {
       </Container>
       <Table id="table2" columns={data2.columns2} rows={data2.rows2} hideFooterPagination />
 
-      <Container className={classes.container}>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-helper-label" shrink>
-            商品
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            className={classes.selectEmpty}
-            value={shohin}
-            onChange={(e) => setShohin(e.target.value)}>
-            <MenuItem value="">
-              <em>未選択</em>
-            </MenuItem>
-            <MenuItem value={10000}>10000 T-11 赤</MenuItem>
-            <MenuItem value={10100}>10100 H4-11</MenuItem>
-            <MenuItem value={10800}>10800 H2-11</MenuItem>
-          </Select>
-        </FormControl>
+      <Grid className={classes.container} container spacing={4}>
+        <Grid item xs={12}>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-helper-label" shrink>
+              商品
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              className={classes.selectEmpty}
+              value={shohin}
+              onChange={(e) => setShohin(e.target.value)}>
+              <MenuItem value="">
+                <em>未選択</em>
+              </MenuItem>
+              <MenuItem value={10000}>10000 T-11 赤</MenuItem>
+              <MenuItem value={10100}>10100 H4-11</MenuItem>
+              <MenuItem value={10800}>10800 H2-11</MenuItem>
+            </Select>
+          </FormControl>
 
-        <TextField
-          className={classes.input}
-          id="tekiyo-date"
-          label="摘要日"
-          type="date"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          size="small"
-          value={tekiyoDate}
-          onChange={(e) => setTekiyoData(e.target.value)}
-        />
-        <TextField
-          className={classes.input}
-          id="standard-basic2"
-          label="単価"
-          type="number"
-          inputProps={{
-            style: { textAlign: 'right' },
-          }}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={tanka}
-          onChange={(e) => setTanka(e.target.value)}
-          // onFocus={(e) => e.target.select()}
-        />
-      </Container>
+          <TextField
+            className={classes.input}
+            id="tekiyo-date"
+            label="摘要日"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            size="small"
+            value={tekiyoDate}
+            onChange={(e) => setTekiyoData(e.target.value)}
+          />
+          <TextField
+            className={classes.input}
+            id="standard-basic2"
+            label="単価"
+            type="number"
+            inputProps={{
+              style: { textAlign: 'right' },
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={tanka}
+            onChange={(e) => setTanka(e.target.value)}
+            // onFocus={(e) => e.target.select()}
+          />
+        </Grid>
+      </Grid>
 
       <Container className={classes.footerContainer}>
         <AppButton

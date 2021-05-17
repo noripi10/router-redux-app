@@ -20,19 +20,19 @@ const useStyles = makeStyles((theme) => ({
     WebkitFontSmoothing: 'auto',
     letterSpacing: 'normal',
     '& .MuiDataGrid-columnsContainer': {
-      backgroundColor: theme.palette.type === 'light' ? '#fafafa' : '#1d1d1d',
+      backgroundColor: theme.palette.type === 'light' ? '#eee' : '#1d1d1d',
     },
     '& .MuiDataGrid-iconSeparator': {
       display: 'none',
     },
     '& .MuiDataGrid-colCell, .MuiDataGrid-cell': {
-      borderRight: `1px solid ${theme.palette.type === 'light' ? '#ddd' : '#303030'}`,
+      borderRight: `0.5px solid ${theme.palette.type === 'light' ? '#ddd' : '#aaa'}`,
     },
     '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
-      borderBottom: `1px solid ${theme.palette.type === 'light' ? '#ddd' : '#303030'}`,
+      borderBottom: `0.5px solid ${theme.palette.type === 'light' ? '#eee' : '#aaa'}`,
     },
     '& .MuiDataGrid-cell': {
-      color: theme.palette.type === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)',
+      color: theme.palette.type === 'light' ? 'rgba(0,0,0,.85)' : '#aaa)',
     },
     '& .MuiPaginationItem-root': {
       borderRadius: 0,
@@ -47,7 +47,7 @@ const Table = (props) => {
   const classes = useStyles();
 
   return (
-    <div style={{ height: 250, width: '90%', margin: '10px auto' }}>
+    <div style={{ height: 250, width: '95%', margin: '10px auto' }}>
       <DataGrid {...props} className={classes.grid} columnBuffer={2} rowHeight={24} />
     </div>
   );

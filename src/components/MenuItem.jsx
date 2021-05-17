@@ -94,9 +94,6 @@ export default function MenuItem() {
 
   return (
     <>
-      <Typography className={classes.menuTitle} component="h6">
-        メニュー一覧
-      </Typography>
       <div className={classes.root}>
         {MENU_LIST.map((menu) => (
           <ButtonBase

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionLogin } from '../redux/actions/auth';
 import { useLogin } from '../context/AuthProvider';
-import { HeaderBar } from '../components';
 
 const Container = styled.div`
   position: absolute;
@@ -20,7 +19,7 @@ const Container = styled.div`
   margin: auto;
   padding: auto;
   flex-direction: column;
-  background-color: #bbb;
+  background-color: #96aeee;
   border-radius: 8px;
 `;
 
@@ -81,19 +80,20 @@ const Login = () => {
 
     // ログイン処理中な感じに
     setWait(true);
-    const result = await new Promise((resolve, reject) => {
-      try {
-        setTimeout(() => {
-          resolve('OK');
-        }, 1000);
-      } catch {
-        reject('NG');
-      }
-    });
-    console.log(result);
-    if (result === 'OK') {
-      login(userId);
-    }
+    // const result = await new Promise((resolve, reject) => {
+    //   try {
+    //     setTimeout(() => {
+    //       resolve('OK');
+    //     }, 1000);
+    //   } catch {
+    //     reject('NG');
+    //   }
+    // });
+    // if (result === 'OK') {
+    //   login(userId);
+    // }
+    login(userId);
+    setWait(false);
   };
 
   useEffect(() => {
@@ -105,7 +105,6 @@ const Login = () => {
 
   return (
     <>
-      <HeaderBar title="マスターメンテナンス" />
       <Container>
         <div>
           <span>社員ID：</span>

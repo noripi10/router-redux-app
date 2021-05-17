@@ -10,9 +10,7 @@ import {
   makeStyles,
   createStyles,
 } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ExitIcon from '@material-ui/icons/ExitToApp';
-
+import { Inbox as InboxIcon, ExitToApp as ExitIcon, Home as HomeIcon } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { actionLogout } from '../redux/actions/auth';
 
@@ -37,7 +35,7 @@ export const DrawerNav = ({ open, setOpen, ...otherProps }) => {
         <List className={classes.list}>
           <ListItem button onClick={() => history.push('/')}>
             <ListItemIcon>
-              <ExitIcon />
+              <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="ホーム" />
           </ListItem>

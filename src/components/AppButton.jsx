@@ -16,7 +16,7 @@ const AppButton = ({ children, color, ...ButtonProps }) => {
       {...ButtonProps}
       className={classes.button}
       variant="contained"
-      color={color || 'inherit'}>
+      color={color || 'default'}>
       {children}
     </Button>
   );
