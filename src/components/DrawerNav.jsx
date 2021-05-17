@@ -13,10 +13,10 @@ import {
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import ExitIcon from '@material-ui/icons/ExitToApp';
 
-import { MENU_LIST } from '../data/menu';
-
 import { useDispatch } from 'react-redux';
 import { actionLogout } from '../redux/actions/auth';
+
+import { MENU_LIST } from '../data/menu';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -33,6 +33,17 @@ export const DrawerNav = ({ open, setOpen, ...otherProps }) => {
 
   return (
     <Drawer open={open} onClose={() => setOpen(false)}>
+      <div>
+        <List className={classes.list}>
+          <ListItem button onClick={() => history.push('/')}>
+            <ListItemIcon>
+              <ExitIcon />
+            </ListItemIcon>
+            <ListItemText primary="ホーム" />
+          </ListItem>
+        </List>
+        <Divider />
+      </div>
       <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <List className={classes.list}>
           {MENU_LIST.map((MENU) => (

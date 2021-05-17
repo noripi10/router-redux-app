@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Container, makeStyles } from '@material-ui/core';
-import { HeaderBar } from '../components';
+import {
+  TextField,
+  Container,
+  Select,
+  InputLabel,
+  FormControl,
+  MenuItem,
+  makeStyles,
+} from '@material-ui/core';
+import { HeaderBar, SuggestionField } from '../components';
 import { AppButton, Table } from '../components';
 
 const initRows = [
@@ -22,7 +30,7 @@ const initRows2 = [
 const initColumns = Object.keys(initRows[0]).map((key, i) => ({
   field: key,
   hide: key === 'id' ? true : false,
-  width: (i + 1) * 200,
+  width: (i + 1) * 150,
   renderHeader: (params) => {
     return (
       <span role="img" aria-label="enjoy">
@@ -36,29 +44,42 @@ const initColumns2 = Object.keys(initRows2[0]).map((key, i) => ({
   field: key,
   headerName: key.toUpperCase(),
   hide: key === 'id' ? true : false,
-  width: (i + 1) * 200,
+  width: (i + 1) * 150,
 }));
 
 const useClasses = makeStyles((theme) => ({
+  root: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
-    margin: 'auto 48px',
+    margin: '6px 48px',
     marginBottom: 8,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
   footerContainer: {
-    marginTop: 32,
+    marginTop: 8,
     textAlign: 'right',
   },
   input: {
-    width: 250,
-    fontSize: 16,
+    minWidth: 200,
+    fontSize: 14,
     margin: 8,
   },
-  button: {
-    width: 120,
-    height: 36,
+  numberInput: {
+    textAlign: 'center',
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -68,6 +89,10 @@ const PointCharge = () => {
   const [data2, setData2] = useState({ rows2: [], columns2: [] });
   // const [selectData, setSelectData] = useState({});
 
+  const [shohin, setShohin] = useState('');
+  const [tekiyoDate, setTekiyoData] = useState();
+  const [tanka, setTanka] = useState(0);
+
   useEffect(() => {
     setData({ rows: initRows, columns: initColumns });
     setData2({ rows2: initRows2, columns2: initColumns2 });
@@ -75,12 +100,18 @@ const PointCharge = () => {
   return (
     <>
       <HeaderBar title="一括登録" />
+
       {/* 請求先 */}
-      <Container className={classes.container} fixed>
-        <TextField className={classes.input} id="standard-basic1" label="請求先" autoFocus />
+      <Container className={classes.container}>
+        {/* <TextField className={classes.input} id="standard-basic1" label="請求先" autoFocus /> */}
+        <SuggestionField />
+
         <AppButton
           onClick={(e) => {
             e.preventDefault();
+
+            const demo_data = document.getElementById('asynchronous-demo');
+            console.log(demo_data.value);
 
             const newRows = data.rows.map((row, index) => {
               row.name = index.toString() + 'table1';
@@ -124,10 +155,65 @@ const PointCharge = () => {
       </Container>
       <Table id="table2" columns={data2.columns2} rows={data2.rows2} hideFooterPagination />
 
+      <Container className={classes.container}>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-simple-select-helper-label" shrink>
+            商品
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-helper-label"
+            id="demo-simple-select-helper"
+            className={classes.selectEmpty}
+            value={shohin}
+            onChange={(e) => setShohin(e.target.value)}>
+            <MenuItem value="">
+              <em>未選択</em>
+            </MenuItem>
+            <MenuItem value={10000}>10000 T-11 赤</MenuItem>
+            <MenuItem value={10100}>10100 H4-11</MenuItem>
+            <MenuItem value={10800}>10800 H2-11</MenuItem>
+          </Select>
+        </FormControl>
+
+        <TextField
+          className={classes.input}
+          id="tekiyo-date"
+          label="摘要日"
+          type="date"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          size="small"
+          value={tekiyoDate}
+          onChange={(e) => setTekiyoData(e.target.value)}
+        />
+        <TextField
+          className={classes.input}
+          id="standard-basic2"
+          label="単価"
+          type="number"
+          inputProps={{
+            style: { textAlign: 'right' },
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={tanka}
+          onChange={(e) => setTanka(e.target.value)}
+          // onFocus={(e) => e.target.select()}
+        />
+      </Container>
+
       <Container className={classes.footerContainer}>
-        <Button className={classes.button} variant="contained" color="inherit">
+        <AppButton
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            console.log({ shohin, tekiyoDate, tanka });
+          }}>
           実行
-        </Button>
+        </AppButton>
       </Container>
     </>
   );

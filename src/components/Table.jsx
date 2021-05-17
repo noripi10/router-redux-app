@@ -26,16 +26,19 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
     '& .MuiDataGrid-colCell, .MuiDataGrid-cell': {
-      borderRight: `1px solid ${theme.palette.type === 'light' ? '#f0f0f0' : '#303030'}`,
+      borderRight: `1px solid ${theme.palette.type === 'light' ? '#ddd' : '#303030'}`,
     },
     '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
-      borderBottom: `1px solid ${theme.palette.type === 'light' ? '#f0f0f0' : '#303030'}`,
+      borderBottom: `1px solid ${theme.palette.type === 'light' ? '#ddd' : '#303030'}`,
     },
     '& .MuiDataGrid-cell': {
       color: theme.palette.type === 'light' ? 'rgba(0,0,0,.85)' : 'rgba(255,255,255,0.65)',
     },
     '& .MuiPaginationItem-root': {
       borderRadius: 0,
+    },
+    '& .MuiDataGrid-footer': {
+      display: 'none',
     },
   },
 }));
@@ -44,8 +47,8 @@ const Table = (props) => {
   const classes = useStyles();
 
   return (
-    <div style={{ height: 400, width: '90%', margin: '10px auto' }}>
-      <DataGrid {...props} className={classes.grid} columnBuffer={2} rowHeight={26} />
+    <div style={{ height: 250, width: '90%', margin: '10px auto' }}>
+      <DataGrid {...props} className={classes.grid} columnBuffer={2} rowHeight={24} />
     </div>
   );
 };

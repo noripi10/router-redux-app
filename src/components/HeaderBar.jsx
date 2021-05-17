@@ -7,9 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitIcon from '@material-ui/icons/ExitToApp';
 
-import { useAuth } from '../context/AuthProvider';
-import { useDispatch, useSelector } from 'react-redux';
-import { actionLogout } from '../redux/actions/auth';
+import { useAuth, useLogout } from '../context/AuthProvider';
+import { useSelector } from 'react-redux';
 import { DrawerNav } from './DrawerNav';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,10 +29,12 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderBar = (props) => {
   const [open, setOpen] = useState(false);
+
   const classes = useStyles();
   const isAuthenticated = useAuth();
+  const logout = useLogout();
+
   const auth = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   const drawerToggle = () => {
     setOpen((prev) => !prev);
@@ -65,7 +66,7 @@ const HeaderBar = (props) => {
                   className={classes.menuButton}
                   color="inherit"
                   aria-label="logout"
-                  onClick={() => dispatch(actionLogout())}>
+                  onClick={logout}>
                   <ExitIcon />
                 </IconButton>
               </>

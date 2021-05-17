@@ -8,11 +8,15 @@ const useClasses = makeStyles((theme) => ({
   },
 }));
 
-const AppButton = ({ children, ...ButtonProps }) => {
+const AppButton = ({ children, color, ...ButtonProps }) => {
   const classes = useClasses();
 
   return (
-    <Button {...ButtonProps} className={classes.button} variant="contained" color="inherit">
+    <Button
+      {...ButtonProps}
+      className={classes.button}
+      variant="contained"
+      color={color || 'inherit'}>
       {children}
     </Button>
   );

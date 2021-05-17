@@ -85,7 +85,7 @@ const Login = () => {
       try {
         setTimeout(() => {
           resolve('OK');
-        }, 3000);
+        }, 1000);
       } catch {
         reject('NG');
       }
