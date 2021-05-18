@@ -171,12 +171,12 @@ const PointCharge = () => {
       <Grid className={classes.container} container spacing={4}>
         <Grid item xs={12}>
           <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-helper-label" shrink>
+            <InputLabel id="shohin-label" shrink>
               商品
             </InputLabel>
             <Select
-              labelId="demo-simple-select-helper-label"
-              id="demo-simple-select-helper"
+              labelId="shohin-label"
+              id="shohin-select"
               className={classes.selectEmpty}
               value={shohin}
               onChange={(e) => setShohin(e.target.value)}>
@@ -203,7 +203,7 @@ const PointCharge = () => {
           />
           <TextField
             className={classes.input}
-            id="standard-basic2"
+            id="tanka"
             label="単価"
             type="number"
             inputProps={{

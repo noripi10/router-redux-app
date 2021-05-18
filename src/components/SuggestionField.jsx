@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const SuggestionField = (props) => {
   const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState([
+  const [options] = React.useState([
     {
       HAISOSAKI_ID: '007145100809',
       HAISO_NAME: '031648100ニチユＭＨＩ中部㈱金沢支店（北日本運輸）',
