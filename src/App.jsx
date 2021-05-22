@@ -1,15 +1,15 @@
-import React from 'react';
-import './App.css';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import store, { persister } from './redux/store';
-import { Login, Home, PointCharge } from './pages';
-import AuthProvider, { useAuth } from './context/AuthProvider';
+import './App.css';
 import { HeaderBar } from './components';
+import AuthProvider, { useAuth } from './context/AuthProvider';
+import { Home, Login, PointCharge } from './pages';
+import store, { persister } from './redux/store';
 
 const AuthRoute = (props) => {
   const isAuthenticated = useAuth();
@@ -49,7 +49,7 @@ const App = () => {
     [prefersDarkMode]
   );
 
-  console.log({ theme });
+  // console.log({ theme });
   return (
     <Provider {...{ store }}>
       <PersistGate loading={null} persistor={persister}>
