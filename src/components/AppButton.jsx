@@ -8,7 +8,7 @@ const useClasses = makeStyles((theme) => ({
   },
 }));
 
-const AppButton = ({ children, color, ...ButtonProps }) => {
+const AppButton = React.memo(({ children, color, ...ButtonProps }) => {
   const classes = useClasses();
 
   return (
@@ -20,6 +20,6 @@ const AppButton = ({ children, color, ...ButtonProps }) => {
       {children}
     </Button>
   );
-};
+});
 
 export default AppButton;

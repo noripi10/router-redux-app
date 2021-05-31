@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Table = (props) => {
+const Table = React.memo((props) => {
   const classes = useStyles();
 
   return (
@@ -51,6 +51,6 @@ const Table = (props) => {
       <DataGrid {...props} className={classes.grid} columnBuffer={2} rowHeight={24} />
     </div>
   );
-};
+});
 
 export default Table;

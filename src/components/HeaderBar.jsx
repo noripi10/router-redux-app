@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderBar = (props) => {
+const HeaderBar = React.memo((props) => {
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
@@ -78,6 +78,6 @@ const HeaderBar = (props) => {
       <DrawerNav {...{ open, setOpen }} />
     </>
   );
-};
+});
 
 export default HeaderBar;

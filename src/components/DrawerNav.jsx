@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-export const DrawerNav = ({ open, setOpen, ...otherProps }) => {
+export const DrawerNav = React.memo(({ open, setOpen, ...otherProps }) => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -69,4 +69,4 @@ export const DrawerNav = ({ open, setOpen, ...otherProps }) => {
       </div>
     </Drawer>
   );
-};
+});
