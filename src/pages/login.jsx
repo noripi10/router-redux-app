@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionLogin } from '../redux/actions/auth';
+import { actionLogin } from '../store/actions/auth';
 import { useLogin } from '../context/AuthProvider';
 
 const Container = styled.div`

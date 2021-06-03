@@ -29,3 +29,5 @@ const store = createStore(
 
 export const persister = persistStore(store);
 export default store;
+
+export const bareStore = createStore(rootReducer);

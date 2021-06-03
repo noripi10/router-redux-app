@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { Inbox as InboxIcon, ExitToApp as ExitIcon, Home as HomeIcon } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
-import { actionLogout } from '../redux/actions/auth';
+import { actionLogout } from '../store/actions/auth';
 
 import { MENU_LIST } from '../data/menu';
 

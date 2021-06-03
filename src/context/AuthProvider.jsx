@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionLogin, actionLogout } from '../redux/actions/auth';
+import { actionLogin, actionLogout } from '../store/actions/auth';
 
 export const AuthContext = createContext(null);
 
