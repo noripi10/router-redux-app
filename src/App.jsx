@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -49,7 +48,6 @@ const App = () => {
     [prefersDarkMode]
   );
 
-  // console.log({ theme });
   return (
     <Provider {...{ store }}>
       <PersistGate loading={null} persistor={persister}>

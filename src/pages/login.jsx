@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionLogin } from '../store/actions/auth';
-import { useLogin } from '../context/AuthProvider';
+import { actionLogin, actionLoginThunk } from '../store/actions/auth';
+// import { useLogin, useLoginThunk } from '../context/AuthProvider';
 
 const Container = styled.div`
   position: absolute;
@@ -57,8 +57,10 @@ const Wait = styled.div`
   z-index: 10;
 `;
 
-const Login = () => {
-  const login = useLogin();
+const Login = ({ actionLogin, actionLoginThunk }) => {
+  // const login = useLogin();
+  // const loginThunk = useLoginThunk();
+
   const [userId, setUserID] = useState('');
   const [wait, setWait] = useState(false);
 
@@ -74,25 +76,15 @@ const Login = () => {
 
   const loginHandle = async (e) => {
     e.preventDefault();
+
     if (!userId) {
       return false;
     }
 
     // ログイン処理中な感じに
     setWait(true);
-    // const result = await new Promise((resolve, reject) => {
-    //   try {
-    //     setTimeout(() => {
-    //       resolve('OK');
-    //     }, 1000);
-    //   } catch {
-    //     reject('NG');
-    //   }
-    // });
-    // if (result === 'OK') {
-    //   login(userId);
-    // }
-    login(userId);
+    // actionLogin(userId);
+    await actionLoginThunk(userId);
     setWait(false);
   };
 
@@ -128,5 +120,5 @@ export default connect(
       auth,
     };
   },
-  (dispatch) => bindActionCreators({ actionLogin }, dispatch)
+  (dispatch) => bindActionCreators({ actionLogin, actionLoginThunk }, dispatch)
 )(Login);

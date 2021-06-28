@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionLogin, actionLogout } from '../store/actions/auth';
+import { actionLogin, actionLogout, actionLoginThunk } from '../store/actions/auth';
 
 export const AuthContext = createContext(null);
 
@@ -10,8 +10,12 @@ const AuthProvider = (props) => {
 
   const isAuthenticated = auth && auth.USER_ID !== null;
 
-  const login = (USER_ID) => {
-    actionLogin(USER_ID);
+  const login = (userID) => {
+    actionLogin(userID);
+  };
+
+  const loginThunk = async (userID) => {
+    await actionLoginThunk(userID);
   };
 
   const logout = () => {
@@ -19,7 +23,7 @@ const AuthProvider = (props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, loginThunk }}>
       {children}
     </AuthContext.Provider>
   );
@@ -27,6 +31,7 @@ const AuthProvider = (props) => {
 
 export const useAuth = () => useContext(AuthContext).isAuthenticated;
 export const useLogin = () => useContext(AuthContext).login;
+export const useLoginThunk = () => useContext(AuthContext).loginThunk;
 export const useLogout = () => useContext(AuthContext).logout;
 
 const mapStateToProps = (state) => {
