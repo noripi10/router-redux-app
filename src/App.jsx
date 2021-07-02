@@ -58,6 +58,7 @@ const App = () => {
               <HeaderBar title={'マスターメンテナンス'} />
               <Switch>
                 <AuthRoute exact path="/login" component={Login} />
+                <AuthRoute exact path="/login2" component={Login} />
                 <AppRoute exact path="/" component={Home} />
                 <AppRoute path="/point-charge" component={PointCharge} />
               </Switch>
