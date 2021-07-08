@@ -12,7 +12,7 @@ export const actionLoginThunk = (userID) => async (dispatch) => {
     try {
       setTimeout(() => {
         resolve(userID + '_thunk');
-      }, 1500);
+      }, 5000);
     } catch {
       reject('NG');
     }

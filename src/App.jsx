@@ -1,40 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route, Switch, useLocation } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import AuthProvider, { useAuth } from './context/AuthProvider';
-import { Home, Login, PointCharge } from './pages';
-import { HeaderBar } from './components';
+import AuthProvider from './context/AuthProvider';
 import store, { persister } from './store';
-
-const AuthRoute = (props) => {
-  const isAuthenticated = useAuth();
-  const location = useLocation();
-
-  if (isAuthenticated) {
-    return <Redirect to={location.state.from ?? '/'} />;
-  } else {
-    return <Route {...props} />;
-  }
-};
-
-const AppRoute = (props) => {
-  const isAuthenticated = useAuth();
-
-  if (isAuthenticated) {
-    return <Route {...props} />;
-  } else {
-    return (
-      <Redirect
-        // ログイン後同じstateへ復帰する用に元stateを指定
-        to={{ pathname: '/login', state: { from: props.location.pathname } }}
-      />
-    );
-  }
-};
+import { HeaderBar, RouterSwitch } from './components';
 
 const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -56,12 +29,7 @@ const App = () => {
           <AuthProvider>
             <BrowserRouter>
               <HeaderBar title={'マスターメンテナンス'} />
-              <Switch>
-                <AuthRoute exact path="/login" component={Login} />
-                <AuthRoute exact path="/login2" component={Login} />
-                <AppRoute exact path="/" component={Home} />
-                <AppRoute path="/point-charge" component={PointCharge} />
-              </Switch>
+              <RouterSwitch />
             </BrowserRouter>
           </AuthProvider>
         </ThemeProvider>

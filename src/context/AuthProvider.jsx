@@ -6,7 +6,8 @@ import { actionLogin, actionLogout, actionLoginThunk } from '../store/actions/au
 export const AuthContext = createContext(null);
 
 const AuthProvider = (props) => {
-  const { auth, actionLogin, actionLogout, children } = props;
+  // bind済みアクション
+  const { auth, actionLogin, actionLogout, actionLoginThunk, children } = props;
 
   const isAuthenticated = auth && auth.USER_ID !== null;
 
@@ -14,8 +15,8 @@ const AuthProvider = (props) => {
     actionLogin(userID);
   };
 
-  const loginThunk = async (userID) => {
-    await actionLoginThunk(userID);
+  const loginThunk = (userID) => {
+    actionLoginThunk(userID);
   };
 
   const logout = () => {
@@ -31,8 +32,8 @@ const AuthProvider = (props) => {
 
 export const useAuth = () => useContext(AuthContext).isAuthenticated;
 export const useLogin = () => useContext(AuthContext).login;
-export const useLoginThunk = () => useContext(AuthContext).loginThunk;
 export const useLogout = () => useContext(AuthContext).logout;
+export const useLoginThunk = () => useContext(AuthContext).loginThunk;
 
 const mapStateToProps = (state) => {
   const { auth } = state;
@@ -40,7 +41,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ actionLogin, actionLogout }, dispatch);
+  return bindActionCreators({ actionLogin, actionLogout, actionLoginThunk }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthProvider);
