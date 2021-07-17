@@ -26,20 +26,20 @@ const Div = styled.div`
   padding-bottom: 8px;
 `;
 
-const Form = styled.form`
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  background: blue;
-  button {
-    &:hover {
-      background: yellow;
-    }
-  }
-`;
+// const Form = styled.form`
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100%;
+//   height: 100%;
+//   text-align: center;
+//   background: blue;
+//   button {
+//     &:hover {
+//       background: yellow;
+//     }
+//   }
+// `;
 
 const Error = styled.div`
   color: red;

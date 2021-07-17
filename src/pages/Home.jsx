@@ -5,6 +5,8 @@ import { Container, Typography, makeStyles } from '@material-ui/core';
 // import { AuthContext } from '../context/AuthProvider';
 import { MenuItem } from '../components';
 
+import { useEnterKeyFocusControl } from '../hooks/useEnterKeyFocusControl';
+import { Input } from '../components';
 const useClasses = makeStyles((theme) => ({
   titleContainer: {
     margin: 12,
@@ -18,6 +20,8 @@ const Home = () => {
   // const history = useHistory();
   // const auth = useSelector((state) => state.auth);
 
+  const registerController = useEnterKeyFocusControl();
+
   return (
     <>
       <Container className={classes.titleContainer}>
@@ -25,6 +29,11 @@ const Home = () => {
       </Container>
       <Container>
         <MenuItem />
+      </Container>
+      <Container>
+        {[...Array(10).keys()].map((key, index) => {
+          return <Input key={key} {...{ index, registerController }} />;
+        })}
       </Container>
     </>
   );
