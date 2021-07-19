@@ -3,6 +3,10 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { actionIncrementAsync, actionDecrementAsync } from '../store/actions/count';
+import { RouteStateType } from '../types/RouteStateType';
+
 import { useLoginThunk } from '../context/AuthProvider';
 
 const LoginForm = styled.div`
@@ -24,6 +28,8 @@ const Div = styled.div`
   flex-direction: column;
   padding-top: 8px;
   padding-bottom: 8px;
+  justify-content: center;
+  align-items: center;
 `;
 
 // const Form = styled.form`
@@ -49,6 +55,13 @@ const Error = styled.div`
 
 const Login2 = () => {
   const loginThunk = useLoginThunk();
+
+  const dispatch = useDispatch();
+  const count = useSelector((state: RouteStateType) => state.count);
+
+  const onCalc = (flg: number) => {
+    dispatch(flg > 0 ? actionIncrementAsync() : actionDecrementAsync());
+  };
 
   return (
     <LoginForm id="login-form">
@@ -91,6 +104,13 @@ const Login2 = () => {
           </form>
         )}
       </Formik>
+      <Div>
+        {count.Counter}
+        <div>
+          <button onClick={() => onCalc(-1)}>マイナス</button>
+          <button onClick={() => onCalc(1)}>プラス</button>
+        </div>
+      </Div>
     </LoginForm>
   );
 };

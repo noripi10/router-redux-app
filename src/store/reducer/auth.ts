@@ -1,10 +1,16 @@
 import { LOGIN, LOGOUT, LOGIN_THUNK } from '../actionType';
+import { AuthUserType } from '../../types/AuthUserType';
 
-const initialState = {
+const initialState: AuthUserType = {
   USER_ID: null,
 };
 
-export const authReducer = (state = initialState, action) => {
+type ActionType = {
+  type: typeof LOGIN | typeof LOGOUT | typeof LOGIN_THUNK;
+  payload: AuthUserType;
+};
+
+export const authReducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
     case LOGIN:
       return {

@@ -14,7 +14,7 @@ const useClasses = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const Home: React.FC = () => {
   const classes = useClasses();
   // const { logout } = useContext(AuthContext);
   // const history = useHistory();
@@ -31,7 +31,7 @@ const Home = () => {
         <MenuItem />
       </Container>
       <Container>
-        {[...Array(10).keys()].map((key, index) => {
+        {[...Array(10).keys()].map((key: number, index: number) => {
           return <Input key={key} {...{ index, registerController }} />;
         })}
       </Container>

@@ -1,13 +1,14 @@
+import { Dispatch } from 'redux';
 import { LOGIN, LOGOUT, LOGIN_THUNK } from '../actionType';
 
-export const actionLogin = (userID) => {
+export const actionLogin = (userID: string) => {
   return {
     type: LOGIN,
     payload: { USER_ID: userID },
   };
 };
 
-export const actionLoginThunk = (userID) => async (dispatch) => {
+export const actionLoginThunk = (userID: string) => async (dispatch: Dispatch) => {
   const result = await new Promise((resolve, reject) => {
     try {
       setTimeout(() => {

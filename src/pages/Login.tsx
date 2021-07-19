@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import { actionLogin, actionLoginThunk } from '../store/actions/auth';
 // import { useLogin, useLoginThunk } from '../context/AuthProvider';
 
+import { RouteStateType } from '../types/RouteStateType';
+
 const Container = styled.div`
   position: absolute;
   top: 50%;
@@ -57,24 +59,35 @@ const Wait = styled.div`
   z-index: 10;
 `;
 
-const Login = ({ actionLogin, actionLoginThunk }) => {
+type Props = {
+  actionLogin: any;
+  actionLoginThunk: any;
+};
+
+const Login: React.FC<Props> = ({
+  actionLogin,
+  actionLoginThunk,
+}: {
+  actionLogin: any;
+  actionLoginThunk: any;
+}) => {
   // const login = useLogin();
   // const loginThunk = useLoginThunk();
 
   const [userId, setUserID] = useState('');
   const [wait, setWait] = useState(false);
 
-  const textChange = (e) => {
+  const textChange = (e: any) => {
     setUserID(e.target.value);
   };
 
-  const keyDown = (e) => {
+  const keyDown = (e: any) => {
     if (e.keyCode === 13) {
       loginHandle(e);
     }
   };
 
-  const loginHandle = async (e) => {
+  const loginHandle = async (e: any) => {
     e.preventDefault();
 
     if (!userId) {
@@ -114,7 +127,7 @@ const Login = ({ actionLogin, actionLoginThunk }) => {
 };
 
 export default connect(
-  (state) => {
+  (state: RouteStateType) => {
     const { auth } = state;
     return {
       auth,
