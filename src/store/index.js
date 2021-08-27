@@ -1,5 +1,5 @@
 import Cookies from 'cookies-js';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import { CookieStorage } from 'redux-persist-cookie-storage';
 import storage from 'redux-persist/lib/storage';

@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { SuggestionField } from '../components';
 import { AppButton, Table } from '../components';
+import { connect } from 'react-redux';
 
 const initRows = [
   { id: 0, code: '000', name: 'aaa' },
@@ -94,7 +95,7 @@ const useClasses = makeStyles((theme) => ({
   },
 }));
 
-const PointCharge = () => {
+const PointCharge = ({ auth }) => {
   const classes = useClasses();
   const [data, setData] = useState({ rows: [], columns: [] });
   const [data2, setData2] = useState({ rows2: [], columns2: [] });
@@ -234,4 +235,7 @@ const PointCharge = () => {
   );
 };
 
-export default PointCharge;
+export default connect((state) => {
+  const { auth } = state;
+  return { auth };
+})(PointCharge);

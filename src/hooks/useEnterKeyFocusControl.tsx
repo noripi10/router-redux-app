@@ -1,12 +1,10 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, FocusEvent } from 'react';
 
 export const useEnterKeyFocusControl = () => {
   const elementMapRef = useRef(new Map<number, HTMLElement>());
 
   const controller = useCallback(
     (index: number) => {
-      console.log({ elementMapRef });
-
       const onKeyDown = ({ key }: { key: string }) => {
         if (key === 'Enter') {
           const sortedIndices = [...elementMapRef.current.keys()].sort();
@@ -25,4 +23,30 @@ export const useEnterKeyFocusControl = () => {
   );
 
   return controller;
+};
+
+export const useKeyDownControl = () => {
+  const refElMap = useRef(new Map<number, HTMLElement>());
+  return useCallback(
+    (no: number) => ({
+      ref: (element: HTMLElement | null) => {
+        if (element) {
+          refElMap.current.set(no, element);
+        }
+      },
+      onKeyDown: ({ key }: { key: string }) => {
+        if (key !== 'Enter') return;
+        const sortedIndices = [...refElMap.current.keys()].sort();
+        const nextIndex = sortedIndices[sortedIndices.indexOf(no) + 1];
+        if (typeof nextIndex === 'number') refElMap.current.get(nextIndex)?.focus();
+      },
+      onFocus: (e: FocusEvent<HTMLElement>) => {
+        e.target.style.background = 'lightyellow';
+      },
+      onBlur: (e: FocusEvent<HTMLElement>) => {
+        e.target.style.background = 'white';
+      },
+    }),
+    [refElMap]
+  );
 };
